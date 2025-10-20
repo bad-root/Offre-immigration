@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Candidatures</title>
+<style>
+body { font-family: 'Inter', sans-serif; padding: 2rem; background: #f3f4f6; }
+h1 { color: #004aad; }
+.app { background: white; padding: 1rem; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.app p { margin: 0.3rem 0; }
+</style>
+</head>
+<body>
+<h1>Liste des candidatures locales</h1>
+<div id="apps"></div>
+
+
+<script>
+const apps = JSON.parse(localStorage.getItem('applications')) || [];
+const container = document.getElementById('apps');
+
+
+if(apps.length === 0) {
+container.innerHTML = '<p>Aucune candidature enregistrée.</p>';
+} else {
+apps.forEach(app => {
+const div = document.createElement('div');
+div.classList.add('app');
+div.innerHTML = `<p><strong>Poste :</strong> ${app.job}</p>
+<p><strong>Email :</strong> ${app.email}</p>
+<p><strong>Note :</strong> ${app.note}</p>
+<p><em>Soumis le ${app.date}</em></p>`;
+container.appendChild(div);
+});
+}
+</script>
+</body>
+</html>
